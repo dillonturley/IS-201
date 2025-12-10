@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Survive a Dinosaur Attack (Kid-Friendly!)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background: linear-gradient(135deg, #0a2f1f 0%, #1a4d2e 50%, #0a2f1f 100%);
+            color: #e3f7d4;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background leaves */
+        body::before {
+            content: '🍃';
+            position: fixed;
+            font-size: 3rem;
+            top: -50px;
+            left: 20%;
+            animation: falling 15s infinite linear;
+            opacity: 0.3;
+        }
+
+        body::after {
+            content: '🌿';
+            position: fixed;
+            font-size: 2rem;
+            top: -50px;
+            right: 30%;
+            animation: falling 20s infinite linear 5s;
+            opacity: 0.3;
+        }
+
+        @keyframes falling {
+            to {
+                top: 110vh;
+                transform: rotate(360deg);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1e6f3f 0%, #2d8a54 100%);
+            color: #c8ffb3;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🦖';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            left: -20px;
+            top: -20px;
+            animation: roar 3s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '🦕';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            right: -20px;
+            bottom: -20px;
+            animation: roar 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes roar {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: #ffeb99;
+        }
+
+        .container {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .jungle-art {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 30px;
+            margin: 40px 0;
+            position: relative;
+            height: 200px;
+        }
+
+        .tree, .dino {
+            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+            transition: transform 0.3s;
+        }
+
+        .tree {
+            width: 120px;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .tree:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .dino {
+            width: 150px;
+            animation: walk 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .dino:hover {
+            transform: scale(1.2) rotate(-5deg);
+        }
+
+        @keyframes walk {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #ffeb99;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 30px 0 20px 0;
+            border-bottom: 3px solid #4a9d5f;
+            padding-bottom: 10px;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #1e5a32 0%, #2d7544 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 3px solid #4a9d5f;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: rgba(255,255,255,0.1);
+            margin: 15px 0;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border-left: 5px solid #77ff5a;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(119, 255, 90, 0.3);
+        }
+
+        li::before {
+            content: '🦴 ';
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .links {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #2d5a40 0%, #3d7a54 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 3px solid #4a9d5f;
+        }
+
+        .links h3 {
+            color: #ffeb99;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .dino-link {
+            display: inline-block;
+            margin: 10px 15px 10px 0;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #4a9d5f 0%, #5bb370 100%);
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 1.1rem;
+        }
+
+        .dino-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(119, 255, 90, 0.4);
+            background: linear-gradient(135deg, #5bb370 0%, #6cc481 100%);
+        }
+
+        .game-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1e5a32 0%, #2d7544 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 3px solid #4a9d5f;
+        }
+
+        .game-instructions {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ffeb99;
+            margin-bottom: 20px;
+        }
+
+        #gameBox {
+            background: linear-gradient(180deg, #87ceeb 0%, #1a4d2e 70%);
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: inset 0 5px 20px rgba(0,0,0,0.3);
+            border: 3px solid #4a9d5f;
+        }
+
+        #ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            background: #654321;
+            border-top: 3px solid #8b6914;
+        }
+
+        #player {
+            width: 50px;
+            height: 50px;
+            background: #77ff5a;
+            position: absolute;
+            bottom: 40px;
+            left: 50px;
+            border-radius: 10px;
+            transition: bottom 0.1s;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        #player::before {
+            content: '🦖';
+        }
+
+        #obstacle {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 40px;
+            right: -50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: meteorSpin 1s linear infinite;
+        }
+
+        #obstacle::before {
+            content: '☄️';
+        }
+
+        @keyframes meteorSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,0,0,0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            font-size: 2rem;
+            display: none;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        #restartBtn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #4a9d5f;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #restartBtn:hover {
+            background: #5bb370;
+            transform: scale(1.1);
+        }
+
+        .clouds {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background: white;
+            border-radius: 50px;
+            opacity: 0.7;
+            animation: float 20s linear infinite;
+        }
+
+        .clouds:nth-child(2) {
+            top: 30px;
+            animation-duration: 25s;
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            from { left: -100px; }
+            to { left: 110%; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: rgba(0,0,0,0.3);
+            color: #c8ffb3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🦖 How to Survive a Dinosaur Attack! 🦕</h1>
+        <p class="subtitle">The Ultimate Kid-Friendly Jungle Survival Guide!</p>
+    </header>
+
+    <div class="container">
+        <div class="jungle-art">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Tree_clipart.svg/512px-Tree_clipart.svg.png" class="tree" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Dinosaur_cartoon.svg/512px-Dinosaur_cartoon.svg.png" class="dino" onclick="roarSound()" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Tree_clipart.svg/512px-Tree_clipart.svg.png" class="tree" />
+        </div>
+
+        <div class="tips-section">
+            <h2>🌟 Essential Survival Steps</h2>
+            <ul>
+                <li onclick="celebrate(this)">Stay calm! Dinosaurs can smell fear... just kidding, but staying calm helps!</li>
+                <li onclick="celebrate(this)">Hide behind big trees or rocks if a big dino walks by.</li>
+                <li onclick="celebrate(this)">Make friends with the herbivores—they're super chill and love to share!</li>
+                <li onclick="celebrate(this)">Don't tap a sleeping T-Rex... no matter how funny it seems. Trust us!</li>
+                <li onclick="celebrate(this)">Always carry snacks. Even dinos respect someone with snacks.</li>
+                <li onclick="celebrate(this)">Run in zig-zags! Big dinos can't turn quickly.</li>
+                <li onclick="celebrate(this)">Learn to climb trees—it's a lifesaver in the Jurassic jungle!</li>
+            </ul>
+        </div>
+
+        <div class="links">
+            <h3>🦴 Meet Your Dinosaur Buddies:</h3>
+            <a href="#" class="dino-link" onclick="showDinoFact('trex'); return false;">🦖 T-Rex Facts</a>
+            <a href="#" class="dino-link" onclick="showDinoFact('raptor'); return false;">🦎 Velociraptor Facts</a>
+            <a href="#" class="dino-link" onclick="showDinoFact('stego'); return false;">🌿 Stegosaurus Facts</a>
+            <a href="#" class="dino-link" onclick="showDinoFact('trike'); return false;">🛡️ Triceratops Facts</a>
+        </div>
+
+        <div class="game-section">
+            <h2>🎮 Epic Dino Jump Challenge!</h2>
+            <p class="game-instructions">Press <strong>SPACEBAR</strong> or <strong>TAP</strong> to jump over the meteor shower! 🌠</p>
+            <div id="gameBox">
+                <div class="clouds"></div>
+                <div class="clouds"></div>
+                <div id="score">Score: 0</div>
+                <div id="player"></div>
+                <div id="obstacle"></div>
+                <div id="ground"></div>
+                <div id="gameOver">
+                    <div>💥 GAME OVER! 💥</div>
+                    <div style="font-size: 1.2rem; margin-top: 10px;">Final Score: <span id="finalScore">0</span></div>
+                    <button id="restartBtn" onclick="restartGame()">Play Again! 🔄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>🌋 Stay safe out there, young explorer! Remember: Not all dinosaurs bite... but most do! 🦷</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">© 2024 Jurassic Survival Academy</p>
+    </footer>
+
+    <script>
+        let player = document.getElementById('player');
+        let obstacle = document.getElementById('obstacle');
+        let scoreDisplay = document.getElementById('score');
+        let gameOverDisplay = document.getElementById('gameOver');
+        let finalScoreDisplay = document.getElementById('finalScore');
+        let jumping = false;
+        let gameRunning = true;
+        let score = 0;
+        let obstacleSpeed = 5;
+
+        // Click tip to celebrate
+        function celebrate(element) {
+            element.style.background = 'rgba(119, 255, 90, 0.3)';
+            setTimeout(() => {
+                element.style.background = 'rgba(255,255,255,0.1)';
+            }, 300);
+        }
+
+        // Dino roar
+        function roarSound() {
+            alert('🦖 ROARRR! The dino says hi!');
+        }
+
+        // Show dino facts
+        function showDinoFact(dino) {
+            const facts = {
+                trex: '🦖 T-Rex had teeth as big as bananas! They were 40 feet long and could run 20 mph!',
+                raptor: '🦎 Velociraptors were actually only 2 feet tall! Movies made them look bigger.',
+                stego: '🌿 Stegosaurus had a brain the size of a walnut but plates to stay cool!',
+                trike: '🛡️ Triceratops had 800 teeth and could weigh as much as an elephant!'
+            };
+            alert(facts[dino]);
+        }
+
+        // Jump function
+        function jump() {
+            if (jumping || !gameRunning) return;
+            jumping = true;
+            let jumpHeight = 0;
+            let jumpInterval = setInterval(() => {
+                if (jumpHeight >= 150) {
+                    clearInterval(jumpInterval);
+                    let fallInterval = setInterval(() => {
+                        if (jumpHeight <= 0) {
+                            clearInterval(fallInterval);
+                            jumping = false;
+                            player.style.bottom = '40px';
+                        } else {
+                            jumpHeight -= 8;
+                            player.style.bottom = (40 + jumpHeight) + 'px';
+                        }
+                    }, 20);
+                } else {
+                    jumpHeight += 8;
+                    player.style.bottom = (40 + jumpHeight) + 'px';
+                }
+            }, 20);
+        }
+
+        // Keyboard controls
+        document.body.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                jump();
+            }
+        });
+
+        // Touch controls for mobile
+        document.getElementById('gameBox').addEventListener('click', jump);
+
+        // Move obstacle
+        function moveObstacle() {
+            if (!gameRunning) return;
+            
+            let pos = parseInt(window.getComputedStyle(obstacle).right);
+            
+            if (pos > window.innerWidth) {
+                obstacle.style.right = '-50px';
+                score++;
+                scoreDisplay.textContent = 'Score: ' + score;
+                
+                // Increase difficulty
+                if (score % 5 === 0) {
+                    obstacleSpeed += 0.5;
+                }
+            } else {
+                obstacle.style.right = pos + obstacleSpeed + 'px';
+            }
+            
+            // Collision detection
+            let playerBottom = parseInt(window.getComputedStyle(player).bottom);
+            let obstacleRight = parseInt(window.getComputedStyle(obstacle).right);
+            let gameBoxWidth = document.getElementById('gameBox').offsetWidth;
+            
+            if (obstacleRight > (gameBoxWidth - 100) && obstacleRight < (gameBoxWidth - 50) && playerBottom < 90) {
+                gameOver();
+            }
+            
+            requestAnimationFrame(moveObstacle);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            finalScoreDisplay.textContent = score;
+            gameOverDisplay.style.display = 'block';
+        }
+
+        function restartGame() {
+            gameRunning = true;
+            score = 0;
+            obstacleSpeed = 5;
+            scoreDisplay.textContent = 'Score: 0';
+            gameOverDisplay.style.display = 'none';
+            obstacle.style.right = '-50px';
+            player.style.bottom = '40px';
+            moveObstacle();
+        }
+
+        // Start game
+        moveObstacle();
+    </script>
+</body>
+</html>

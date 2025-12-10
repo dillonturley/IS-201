@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cool Dinosaurs</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+    <!-- Bouncing dinosaur (demonstrates position: fixed, z-index, left, top via JS) -->
+    <div id="bouncing-dino">🦖</div>
+    
+    <!-- Demonstrates position: absolute with top and right properties -->
+    <div id="absolute-dino">🦕</div>
+    
+    <!-- Demonstrates position: absolute with bottom and left properties -->
+    <div id="bottom-dino">🦴</div>
+
+    <h1>Cool Dinosaurs</h1>
+
+    <!-- LEFT COLUMN (demonstrates class, div, position properties from CSS) -->
+    <div class="common left">
+        <h2>Top Dinosaurs</h2>
+        <ul>
+            <li>Tyrannosaurus Rex</li>
+            <li>Triceratops</li>
+            <li>Velociraptor</li>
+            <li>Spinosaurus</li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT (demonstrates position, top, left, right, bottom from CSS) -->
+    <main class="common">
+        <h2>Why Dinosaurs Are Cool</h2>
+        <p>
+            Dinosaurs ruled the Earth for over 160 million years during the Mesozoic Era. They ranged from tiny 
+            chicken-sized hunters to massive long-necked giants the size of buildings.
+        </p>
+
+        <h2>Fun Facts</h2>
+        <ul>
+            <li>Some dinosaurs had feathers.</li>
+            <li>The fastest dinosaurs could run over 40 mph.</li>
+            <li>Spinosaurus is the only known semi-aquatic dinosaur.</li>
+            <li>Triceratops had horns longer than baseball bats.</li>
+        </ul>
+
+        <h2>The Coolest One</h2>
+        <p>
+            Many paleontologists argue that <strong>T. rex</strong> remains one of the coolest dinosaurs due to its 
+            massive bite force and apex-predator status.
+        </p>
+        
+        <img class="dino-image" src="https://th.bing.com/th/id/R.cbceac4f505cb8db47f21770b3caa8aa?rik=PDddznf6qFBLvQ&riu=http%3a%2f%2fstatic.independent.co.uk%2fs3fs-public%2fthumbnails%2fimage%2f2015%2f11%2f03%2f16%2ft-rex-getty.jpg&ehk=eH7L66wsd0c%2fKr%2bu3ZLUiSzmDR8U1iSs30kMMhAOQZE%3d&risl=&pid=ImgRaw&r=0" alt="A cool T-Rex dinosaur">
+        
+     <!-- Width & Height Demo -->
+        <div class="demo-box">
+            <h3>Width & Height Properties</h3>
+            <p>Paleontologists use precise measurements when documenting fossils:</p>
+            <div class="size-demonstration">
+                🦴 T-Rex Tooth Specimen 🦴<br>
+                Length: 280mm (width)<br>
+                Height: 120mm
+            </div>
+            <p>These CSS properties let us create exact-sized containers, just like fossil display cases!</p>
+        </div>
+        
+        <!-- Inline vs Block Demo -->
+        <div class="demo-box">
+            <h3>Inline vs Block Display</h3>
+            <p><strong>Inline elements</strong> flow together like dinosaur classifications:</p>
+            <p>
+                <span class="inline-badge">Carnivore</span>
+                <span class="inline-badge">Herbivore</span>
+                <span class="inline-badge">Omnivore</span>
+            </p>
+            <p><strong>Block elements</strong> stack like geological layers showing different time periods:</p>
+            <div class="block-section">Triassic Period: 252-201 million years ago - First dinosaurs appear</div>
+            <div class="block-section">Jurassic Period: 201-145 million years ago - Largest dinosaurs roam</div>
+            <div class="block-section">Cretaceous Period: 145-66 million years ago - T-Rex and extinction event</div>
+        </div>
+        
+        <!-- Center tag demo -->
+        <center>
+            <div class="center-demo">
+                <p>🦖 NATURAL HISTORY MUSEUM 🦖</p>
+                <p>This exhibit label is centered using the &lt;center&gt; tag</p>
+                <p style="font-size: 0.85em;">(Like many dinosaur bones, this HTML tag is now considered a fossil - deprecated but still visible!)</p>
+            </div>
+        </center>
+        
+        <p>
+            <a href="https://www.nhm.ac.uk/discover/dinosaurs.html" target="_blank">Learn more about dinosaurs at the Natural History Museum</a>
+        </p>
+    </main>
+
+    <!-- RIGHT: ASCII DINOSAUR -->
+    <div class="common right">
+        <h2>ASCII Dinosaurs</h2>
+
+        <pre style="font-size: 28px; line-height: 28px; font-family: monospace;">
+               ___
+              / __)
+     _.-^^^._/ /
+    /         /
+ __/ (  |  ( |
+/__.-'|_|--|_|
+        </pre>
+
+        <pre style="font-size: 28px; line-height: 28px; font-family: monospace;">
+   .       .
+  / \__^__/ \
+ (   o o    )
+ |    ∆     |
+  \  ___   /
+   '-____-'
+        </pre>
+
+        <pre style="font-size: 28px; line-height: 28px; font-family: monospace;">
+ ,_         _,
+ |\\_,-~"""~\\_
+ / _  ,       \\
+(  @ )         |
+ \   |         |
+  \  |         |
+   \ |         |
+    \|_________|
+        </pre>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2025 Cool Dinosaurs. All rights reserved. 🦖 | 
+        <a href="dinosaur-discovery-hub.html" style="color: #ffd700; text-decoration: none;">Discovery Hub</a>
+    </footer>
+
+    <!-- Bouncing dinosaur script -->
+    <script>
+        const dino = document.getElementById('bouncing-dino');
+
+        let posX = Math.random() * (window.innerWidth - 50);
+        let posY = Math.random() * (window.innerHeight - 50);
+        let speedX = 3;
+        let speedY = 2;
+
+        function moveDino() {
+            posX += speedX;
+            posY += speedY;
+
+            if (posX <= 0 || posX >= window.innerWidth - 50) speedX *= -1;
+            if (posY <= 0 || posY >= window.innerHeight - 50) speedY *= -1;
+
+            dino.style.left = posX + 'px';
+            dino.style.top = posY + 'px';
+
+            requestAnimationFrame(moveDino);
+        }
+
+        moveDino();
+    </script>
+
+</body>
+</html>

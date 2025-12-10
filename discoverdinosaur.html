@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinosaur Discovery Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dino-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .dino-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dino-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .dino-card h2 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .dino-info {
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        .period {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .fun-fact {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #ffd700;
+        }
+
+        .fun-fact h3 {
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 3rem;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1e3c72;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🦕 Dinosaur Discovery Hub 🦖</h1>
+        <p class="subtitle">Explore the Magnificent Creatures of the Mesozoic Era</p>
+    </header>
+
+    <div class="container">
+        <div class="fun-fact">
+            <h3>Did You Know?</h3>
+            <p id="funFact">Click the button below to learn a random dinosaur fact!</p>
+            <button onclick="generateFact()">Generate Random Fact</button>
+        </div>
+
+        <div class="dino-grid">
+            <div class="dino-card">
+                <div class="emoji">🦖</div>
+                <h2>Tyrannosaurus Rex</h2>
+                <div class="dino-info">
+                    <p><strong>Name Meaning:</strong> Tyrant Lizard King</p>
+                    <p><strong>Length:</strong> 40 feet (12 meters)</p>
+                    <p><strong>Diet:</strong> Carnivore</p>
+                    <p><strong>Weight:</strong> 9 tons</p>
+                    <span class="period">Late Cretaceous</span>
+                </div>
+            </div>
+
+            <div class="dino-card">
+                <div class="emoji">🦕</div>
+                <h2>Brachiosaurus</h2>
+                <div class="dino-info">
+                    <p><strong>Name Meaning:</strong> Arm Lizard</p>
+                    <p><strong>Length:</strong> 85 feet (26 meters)</p>
+                    <p><strong>Diet:</strong> Herbivore</p>
+                    <p><strong>Weight:</strong> 56 tons</p>
+                    <span class="period">Late Jurassic</span>
+                </div>
+            </div>
+
+            <div class="dino-card">
+                <div class="emoji">🦎</div>
+                <h2>Velociraptor</h2>
+                <div class="dino-info">
+                    <p><strong>Name Meaning:</strong> Swift Seizer</p>
+                    <p><strong>Length:</strong> 6.5 feet (2 meters)</p>
+                    <p><strong>Diet:</strong> Carnivore</p>
+                    <p><strong>Weight:</strong> 33 pounds</p>
+                    <span class="period">Late Cretaceous</span>
+                </div>
+            </div>
+
+            <div class="dino-card">
+                <div class="emoji">🛡️</div>
+                <h2>Triceratops</h2>
+                <div class="dino-info">
+                    <p><strong>Name Meaning:</strong> Three-Horned Face</p>
+                    <p><strong>Length:</strong> 30 feet (9 meters)</p>
+                    <p><strong>Diet:</strong> Herbivore</p>
+                    <p><strong>Weight:</strong> 12 tons</p>
+                    <span class="period">Late Cretaceous</span>
+                </div>
+            </div>
+
+            <div class="dino-card">
+                <div class="emoji">🦴</div>
+                <h2>Stegosaurus</h2>
+                <div class="dino-info">
+                    <p><strong>Name Meaning:</strong> Roof Lizard</p>
+                    <p><strong>Length:</strong> 30 feet (9 meters)</p>
+                    <p><strong>Diet:</strong> Herbivore</p>
+                    <p><strong>Weight:</strong> 5 tons</p>
+                    <span class="period">Late Jurassic</span>
+                </div>
+            </div>
+
+            <div class="dino-card">
+                <div class="emoji">🦅</div>
+                <h2>Pteranodon</h2>
+                <div class="dino-info">
+                    <p><strong>Name Meaning:</strong> Toothless Wing</p>
+                    <p><strong>Wingspan:</strong> 23 feet (7 meters)</p>
+                    <p><strong>Diet:</strong> Piscivore (fish-eater)</p>
+                    <p><strong>Weight:</strong> 44 pounds</p>
+                    <span class="period">Late Cretaceous</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Dinosaur Discovery Hub | Journey Back 65 Million Years</p>
+    </footer>
+
+    <script>
+        const facts = [
+            "Dinosaurs lived on Earth for about 165 million years before going extinct!",
+            "The smallest dinosaur discovered was about the size of a chicken.",
+            "Some dinosaurs had feathers, just like modern birds!",
+            "The word 'dinosaur' comes from Greek words meaning 'terrible lizard'.",
+            "Dinosaurs lived on all continents, including Antarctica!",
+            "T-Rex had the strongest bite force of any land animal - about 12,800 pounds!",
+            "Some dinosaurs could run up to 40 miles per hour.",
+            "The longest dinosaur name has 23 letters: Micropachycephalosaurus!",
+            "Dinosaur eggs were similar in size to basketballs for large species.",
+            "Birds are actually modern descendants of theropod dinosaurs!"
+        ];
+
+        function generateFact() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            document.getElementById('funFact').textContent = randomFact;
+        }
+
+        const cards = document.querySelectorAll('.dino-card');
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 10);
+            });
+        });
+    </script>
+</body>
+</html>

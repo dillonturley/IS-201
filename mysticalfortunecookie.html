@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥠 Mystical Fortune Cookie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a0033 0%, #330066 50%, #1a0033 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+            to { text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ffccff;
+        }
+
+        .cookie-container {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .cookie {
+            font-size: 8rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 20px rgba(255, 200, 100, 0.8));
+        }
+
+        .cookie:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .cookie.cracked {
+            animation: crack 0.6s ease;
+        }
+
+        @keyframes crack {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(-10deg); }
+            50% { transform: scale(0.9) rotate(10deg); }
+            75% { transform: scale(1.1) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .fortune-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .fortune-box.show {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fortune-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .click-hint {
+            font-size: 1rem;
+            color: #ffccff;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .lucky-numbers {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+        }
+
+        .reset-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated stars -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <h1>🥠 Mystical Fortune Cookie 🥠</h1>
+        <p class="subtitle">Discover your cosmic destiny...</p>
+
+        <div class="cookie-container">
+            <div class="cookie" id="cookie" onclick="crackCookie()">🥠</div>
+            <p class="click-hint" id="hint">Click the cookie to reveal your fortune</p>
+        </div>
+
+        <div class="fortune-box" id="fortuneBox">
+            <p class="fortune-text" id="fortuneText"></p>
+        </div>
+
+        <div class="lucky-numbers" id="luckyNumbers"></div>
+
+        <button class="reset-btn" id="resetBtn" onclick="resetCookie()" style="display: none;">
+            Get Another Fortune
+        </button>
+    </div>
+
+    <script>
+        // Create random stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        const fortunes = [
+            "A great adventure awaits you in the digital realm.",
+            "Your code will compile on the first try... eventually.",
+            "The answer you seek lies in the documentation.",
+            "A mysterious stranger will debug your code.",
+            "Fortune favors the bold... and those who backup their work.",
+            "Your creativity knows no bounds, unlike your RAM.",
+            "A brilliant idea will strike at 3 AM.",
+            "The path to enlightenment is paved with Stack Overflow answers.",
+            "You will discover a shortcut that saves 0.3 seconds.",
+            "A commit message will bring you great joy today.",
+            "The universe aligns in your favor... after a system reboot.",
+            "Your dreams will manifest, but first fix that semicolon.",
+            "Greatness is within reach, and so is the coffee machine.",
+            "An unexpected merge conflict will teach you patience.",
+            "Today's bug is tomorrow's feature.",
+            "Your rubber duck debugging will yield profound insights."
+        ];
+
+        let isCracked = false;
+
+        function crackCookie() {
+            if (isCracked) return;
+            
+            const cookie = document.getElementById('cookie');
+            const fortuneBox = document.getElementById('fortuneBox');
+            const fortuneText = document.getElementById('fortuneText');
+            const luckyNumbers = document.getElementById('luckyNumbers');
+            const hint = document.getElementById('hint');
+            const resetBtn = document.getElementById('resetBtn');
+
+            // Crack animation
+            cookie.classList.add('cracked');
+            isCracked = true;
+
+            // Hide hint
+            hint.style.display = 'none';
+
+            // Show fortune after animation
+            setTimeout(() => {
+                const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+                fortuneText.textContent = randomFortune;
+                fortuneBox.classList.add('show');
+
+                // Generate lucky numbers
+                const numbers = [];
+                for (let i = 0; i < 6; i++) {
+                    numbers.push(Math.floor(Math.random() * 49) + 1);
+                }
+                luckyNumbers.textContent = `✨ Lucky Numbers: ${numbers.join(', ')} ✨`;
+
+                // Show reset button
+                resetBtn.style.display = 'inline-block';
+            }, 600);
+        }
+
+        function resetCookie() {
+            const cookie = document.getElementById('cookie');
+            const fortuneBox = document.getElementById('fortuneBox');
+            const fortuneText = document.getElementById('fortuneText');
+            const luckyNumbers = document.getElementById('luckyNumbers');
+            const hint = document.getElementById('hint');
+            const resetBtn = document.getElementById('resetBtn');
+
+            // Reset everything
+            cookie.classList.remove('cracked');
+            fortuneBox.classList.remove('show');
+            fortuneText.textContent = '';
+            luckyNumbers.textContent = '';
+            hint.style.display = 'block';
+            resetBtn.style.display = 'none';
+            isCracked = false;
+        }
+    </script>
+</body>
+</html>
